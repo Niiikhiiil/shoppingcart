@@ -37,7 +37,7 @@ const SingleProduct = ({ prod,show,setShow,id,setId }) => {
 						{cart.some((p) => p.id === prod.id) ? (
 							<Button
 								variant="danger"
-                                style={{width:"100px"}}
+                                style={{minWidth:"80px"}}
 								onClick={() =>
 									dispatch({
 										type: 'REMOVE_FROM_CART',

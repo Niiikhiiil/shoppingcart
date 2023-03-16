@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { CartState } from '../context/Context';
 import Rating from './Rating';
 
 const Filters = () => {
-	const [rate, setRate] = useState(2);
+	// const [rate, setRate] = useState(2);
 	const {
 		productState: { byStock, byFastDelivery, sort, byRating },
 		productDispatch,
@@ -19,8 +19,8 @@ const Filters = () => {
 					name="group1"
 					type="radio"
 					id={`inline-1`}
-					defaultChecked={sort === 'lowToHigh' ? true : false}
-					onClick={() =>
+					checked={sort === 'lowToHigh' ? true : false}
+					onChange={() =>
 						productDispatch({
 							type: 'SORT_BY_PRICE',
 							payload: 'lowToHigh',
@@ -35,8 +35,8 @@ const Filters = () => {
 					name="group1"
 					type="radio"
 					id={`inline-2`}
-					defaultChecked={sort === 'HighToLow' ? true : false}
-					onClick={() =>
+					checked={sort === 'HighToLow' ? true : false}
+					onChange={() =>
 						productDispatch({
 							type: 'SORT_BY_PRICE',
 							payload: 'HighToLow',
@@ -50,9 +50,9 @@ const Filters = () => {
 					label="Include Out of Stock"
 					name="group1"
 					type="checkbox"
-					defaultChecked={byStock}
+					checked={byStock}
 					id={`inline-3`}
-					onClick={() => productDispatch({ type: 'SORT_BY_STOCK'})}
+					onChange={() => productDispatch({ type: 'SORT_BY_STOCK'})}
 				/>
 			</span>
 			<span>
@@ -62,8 +62,8 @@ const Filters = () => {
 					name="group1"
 					type="checkbox"
 					id={`inline-4`}
-					defaultChecked={byFastDelivery}
-					onClick={() => productDispatch({ type: 'FAST_DELIVERY' })}
+					checked={byFastDelivery}
+					onChange={() => productDispatch({ type: 'FAST_DELIVERY' })}
 				/>
 			</span>
 			<span>

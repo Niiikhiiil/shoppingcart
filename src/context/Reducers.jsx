@@ -1,4 +1,17 @@
 export const cartReducer = (state, action) => {
+	switch (action.type) {
+		case 'ADD_TO_CART': {
+			return {
+				...state,
+				cart: [...state.cart, { ...action.payload, qty: 1 }],
+			};
+		}
+
+		default: {
+			return state;
+		}
+	}
+
 	if (action.type === 'ADD_TO_CART') {
 		return {
 			...state,
@@ -21,6 +34,12 @@ export const cartReducer = (state, action) => {
 			),
 		};
 	}
+	if (action.type === 'TOTAL_AMOUNT') {
+		return { ...state, total: action.payload };
+	}
+	if (action.type === 'RETURN_FOR_SHOP') {
+		return { ...state, cart: [] };
+	}
 	return state;
 };
 
@@ -42,7 +61,7 @@ export const productReducer = (state, action) => {
 	}
 	if (action.type === 'CLEAR_FILTERS') {
 		return { byStock: false, byFastDelivery: false, byRating: 0 };
-       
 	}
+
 	return state;
 };

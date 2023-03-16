@@ -18,21 +18,24 @@ const Cart = () => {
 		setTotal(
 			cart.reduce((acc, curr) => acc + Number(curr.price) * curr.qty, 0),
 		);
-	});
+	}, [total, cart]);
 
 	return (
 		<div className="home">
 			<div className="productContainer">
-				
 				<ListGroup>
-        <Button
-					style={{ width: '80px', height: '50px',marginBottom:"20px" }}
-					onClick={() => {
-						return navigate('/');
-					}}
-				>
-					Back
-				</Button>
+					<Button
+						style={{
+							width: '80px',
+							height: '50px',
+							marginBottom: '20px',
+						}}
+						onClick={() => {
+							return navigate('/');
+						}}
+					>
+						Back
+					</Button>
 					{cart.map((prod) => (
 						<ListGroup.Item key={prod.id}>
 							<Row>
@@ -78,12 +81,12 @@ const Cart = () => {
 									<AiFillDelete
 										fontSize="20px"
 										style={{ cursor: 'pointer' }}
-										onClick={() =>
-											dispatch({
+										onClick={() => {
+											return dispatch({
 												type: 'REMOVE_FROM_CART',
 												payload: prod,
-											})
-										}
+											});
+										}}
 									/>
 								</Col>
 							</Row>
@@ -96,10 +99,23 @@ const Cart = () => {
 				<span style={{ fontWeight: 700, fontsize: 20 }}>
 					Total: {total}
 				</span>
-				{cart.length > 0 ? <Button>Proceed To Checkout</Button> : null}
+				{cart.length > 0 ? (
+					<Button
+						onClick={() => {
+							if (cart.length > 0) {
+								dispatch({
+									type: 'TOTAL_AMOUNT',
+									payload: total,
+								});
+								navigate('/checkout');
+							}
+						}}
+					>
+						Proceed To Checkout
+					</Button>
+				) : null}
 			</div>
 		</div>
 	);
 };
-
 export default Cart;

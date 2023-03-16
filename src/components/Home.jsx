@@ -39,7 +39,6 @@ const Home = () => {
 		return sortProducts;
 	};
 
-	// console.log(transformProduct());
 
 	return (
 		<div className="home">
